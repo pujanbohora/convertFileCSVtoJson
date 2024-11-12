@@ -1,0 +1,15 @@
+const csv2json = require('csv2json');
+const fs = require('fs-extra');
+
+const source = fs.createReadStream( '/Users/pawanbohora/Desktop/convert/Supermart Grocery Sales - Retail Analytics Dataset.csv');
+const output = fs.createWriteStream( '/Users/pawanbohora/Desktop/convert/result2.json');
+
+source
+  .pipe(csv2json())
+  .pipe(output)
+  .on('finish', () => {
+    console.log('CSV to JSON conversion completed.');
+  })
+  .on('error', (error) => {
+    console.error('An error occurred:', error);
+  });
